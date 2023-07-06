@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Headers, Inject, Patch } from '@nestjs/common';
+import { Body, Controller, Headers, Inject, Patch } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiOperation,
@@ -23,7 +23,7 @@ export class ChallengeController {
 
   @Patch('new-instance')
   @ApiOperation({
-    summary: 'Add user instance infos (host and user)',
+    summary: 'Add user instance infos (host and username)',
   })
   @ApiResponse({ status: 201, type: GenericResponseDto })
   @ApiResponse({ status: 401, description: GeneralEnum.NOT_AUTHORIZED })

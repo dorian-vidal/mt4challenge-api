@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Headers,
-  HttpStatus,
-  Inject,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Get, Headers, Inject, Post } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiBody,
@@ -48,12 +40,12 @@ export class AuthController {
 
   @Post('register')
   @ApiOperation({
-    summary: 'Register new user',
+    summary: 'Register new user, will return JWT token in data response field',
   })
   @ApiResponse({
     status: 201,
     type: GenericResponseDto,
-    description: 'Is user already exists, response will be null',
+    description: 'If user already exists, response will be null',
   })
   @ApiResponse({ status: 400, description: ErrorEnum.INVALID_EMAIL })
   @ApiResponse({ status: 400, description: ErrorEnum.INVALID_FIRST_NAME })

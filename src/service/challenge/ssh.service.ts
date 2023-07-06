@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Client } from 'ssh2';
-import { BadRequestException } from '../../exceptions/bad-request.exception';
 import { Logger } from 'winston';
 import { UnauthorizedException } from '../../exception/unauthorized.exception';
 import { ErrorEnum } from '../../enum/error.enum';
@@ -10,7 +9,7 @@ export class SshService {
   constructor(@Inject('winston') private readonly logger: Logger) {}
 
   public async testConnection(host: string, username: string): Promise<void> {
-    let success = false;
+    let error = null;
     this.logger.info(
       'Check SSH connection, host=%s, username=%s',
       host,
@@ -25,29 +24,25 @@ export class SshService {
         username: username,
         privateKey: Buffer.from(process.env.SSH_PRIVATE_KEY_BASE_64, 'base64'),
       });
-      conn.on('error', () => {
-        reject();
+      conn.on('error', (error: Error) => {
+        reject(error);
       });
       conn.on('ready', () => {
         this.logger.info(
-          'Successfully connect via SSH, host=%s, username=%s',
+          'Successfully connected via SSH, host=%s, username=%s',
           host,
           username,
         );
-        success = true;
         resolve();
       });
-    }).catch(() => {
+    }).catch((err: Error) => {
       this.logger.warn(
         'Error when trying to connect via SSH, host=%s, username=%s',
         host,
         username,
       );
+      throw new UnauthorizedException(err.message);
     });
-
-    if (!success) {
-      throw new UnauthorizedException(ErrorEnum.SSH_CONNECTION_FAILS);
-    }
     conn.end();
   }
 }

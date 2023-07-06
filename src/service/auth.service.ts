@@ -78,6 +78,6 @@ export class AuthService {
       id: me.sub,
     });
     // FIXME: retrieve last score and user current challenge
-    return new MeDto(account);
+    return new MeDto(account, process.env.SSH_PUBLIC_KEY);
   }
 }
