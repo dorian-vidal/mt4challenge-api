@@ -5,9 +5,15 @@ import { SshService } from '../service/challenge/ssh.service';
 import { TypeOrmExModule } from './typeorm-ex.module';
 import { AccountRepository } from '../repository/account.repository';
 import { AppJwtService } from '../service/app-jwt.service';
+import { ChallengeRepository } from '../repository/challenge.repository';
 
 @Module({
-  imports: [TypeOrmExModule.forCustomRepository([AccountRepository])],
+  imports: [
+    TypeOrmExModule.forCustomRepository([
+      AccountRepository,
+      ChallengeRepository,
+    ]),
+  ],
   controllers: [ChallengeController],
   providers: [ChallengeService, SshService, AppJwtService],
 })

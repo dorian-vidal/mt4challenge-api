@@ -2,14 +2,12 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Client } from 'ssh2';
 import { Logger } from 'winston';
 import { UnauthorizedException } from '../../exception/unauthorized.exception';
-import { ErrorEnum } from '../../enum/error.enum';
 
 @Injectable()
 export class SshService {
   constructor(@Inject('winston') private readonly logger: Logger) {}
 
   public async testConnection(host: string, username: string): Promise<void> {
-    let error = null;
     this.logger.info(
       'Check SSH connection, host=%s, username=%s',
       host,

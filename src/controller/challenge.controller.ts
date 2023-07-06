@@ -6,11 +6,11 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Logger } from 'winston';
-import { GenericResponseDto } from '../dto/generic-response.dto';
 import { ChallengeService } from '../service/challenge/challenge.service';
 import { NewInstanceDto } from '../dto/challenge/new-instance.dto';
 import GeneralEnum from '../enum/general.enum';
 import { ErrorEnum } from '../enum/error.enum';
+import { ChallengeDto } from '../dto/challenge/challenge.dto';
 
 @Controller('challenge')
 @ApiTags('challenge')
@@ -25,16 +25,18 @@ export class ChallengeController {
   @ApiOperation({
     summary: 'Add user instance infos (host and username)',
   })
-  @ApiResponse({ status: 201, type: GenericResponseDto })
+  @ApiResponse({
+    status: 201,
+    description: 'Will send current challenge to do',
+    type: ChallengeDto,
+  })
   @ApiResponse({ status: 401, description: GeneralEnum.NOT_AUTHORIZED })
   @ApiResponse({ status: 401, description: ErrorEnum.SSH_CONNECTION_FAILS })
   public async newInstance(
     @Headers() headers: Headers,
     @Body() body: NewInstanceDto,
-  ): Promise<GenericResponseDto> {
+  ): Promise<ChallengeDto> {
     this.logger.info('HTTP Handling newInstance');
-    return this.challengeService
-      .newInstance(headers, body)
-      .then(() => GenericResponseDto.ok());
+    return this.challengeService.newInstance(headers, body);
   }
 }

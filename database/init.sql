@@ -22,7 +22,8 @@ CREATE TABLE challenge(
     description TEXT NOT NULL,
     score INTEGER NOT NULL,
     ssh_command_verify TEXT NOT NULL,
-    ssh_command_expected_result TEXT NOT NULL
+    ssh_command_expected_result TEXT NOT NULL,
+    ssh_command_expected_result_dynamic BOOLEAN NOT NULL DEFAULT false
 );
 
 DROP TABLE IF EXISTS achieved_challenge CASCADE;
@@ -47,10 +48,17 @@ COMMIT;
 INSERT INTO account(first_name, last_name, email)
 VALUES ('Patrick', 'Cusable', 'patrick-c-mt4challenge@yopmail.com');
 
-INSERT INTO challenge(description, score, ssh_command_verify, ssh_command_expected_result)
+INSERT INTO challenge(description, score, ssh_command_verify, ssh_command_expected_result, ssh_command_expected_result_dynamic)
 VALUES (
-    'Créer un ficher helloworld.txt qui contient "Hello, World!"',
+    'Bienvenue au premier défi !<br/>Pour ce premier défi, nous allons commencer par une tâche fondamentale: créer un fichier <code>helloworld.txt</code>, le fichier doit contenir le texte "Hello, World!". Cela peut sembler simple, mais c''est en fait un élément clé de la programmation, car c''est souvent le premier programme qu''un développeur écrit en apprenant un nouveau langage de programmation.',
     5,
     'cat ./helloworld.txt',
-    'Hello, World!'
+    'Hello, World!',
+    false
+), (
+    'Créer le script <code>today_french.sh</code> qui retourne la date en français dans le format suivant <code>18 avril 2024</code>',
+    20,
+    './today_french.sh',
+    'date +''%d %B %Y'' | sed ''s/January/janvier/;s/February/février/;s/March/mars/;s/April/avril/;s/May/mai/;s/June/juin/;s/July/juillet/;s/August/août/;s/September/septembre/;s/October/octobre/;s/November/novembre/;s/December/décembre/''',
+    true
 );

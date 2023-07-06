@@ -10,19 +10,22 @@ import { JwtInterface } from '../interface/jwt.interface';
 import { AccountEntity } from '../entity/account.entity';
 import { SignUpDto } from '../dto/auth/sign-up.dto';
 import { TokenDto } from '../dto/auth/token.dto';
+import { ChallengeService } from './challenge/challenge.service';
+import { ChallengeDto } from '../dto/challenge/challenge.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
     @Inject('winston') private readonly logger: Logger,
-    private readonly accountRepo: AccountRepository,
+    private readonly accountRepository: AccountRepository,
     private readonly appJwtService: AppJwtService,
     private readonly mailService: MailService,
+    private readonly challengeService: ChallengeService,
   ) {}
 
   public async login(body: SignInDto): Promise<void> {
     // check if account already exists
-    const account: AccountEntity = await this.accountRepo.findOneBy({
+    const account: AccountEntity = await this.accountRepository.findOneBy({
       email: body.email.toLowerCase(),
     });
     let url: string;
@@ -48,19 +51,20 @@ export class AuthService {
 
   public async register(body: SignUpDto): Promise<TokenDto> {
     // check if account already exists
-    const account: AccountEntity = await this.accountRepo.findOneBy({
+    const account: AccountEntity = await this.accountRepository.findOneBy({
       email: body.email.toLowerCase(),
     });
 
     // if user not already exists
     // should save into database
     if (!account) {
-      const newAccountId = await this.accountRepo.insertNewAndGetID(
-        body.email.toLowerCase(),
-        body.first_name,
-        body.last_name,
-      );
-      const tokenDto = new TokenDto();
+      const newAccountId: string =
+        await this.accountRepository.insertNewAndGetID(
+          body.email.toLowerCase(),
+          body.first_name,
+          body.last_name,
+        );
+      const tokenDto: TokenDto = new TokenDto();
       tokenDto.token = this.appJwtService.generateToken({ sub: newAccountId });
       return tokenDto;
     } else {
@@ -74,10 +78,13 @@ export class AuthService {
 
   public async me(headers: Headers): Promise<MeDto> {
     const me: JwtInterface = this.appJwtService.getJwtFromHeaders(headers);
-    const account: AccountEntity = await this.accountRepo.findOneBy({
+    const account: AccountEntity = await this.accountRepository.findOneBy({
       id: me.sub,
     });
-    // FIXME: retrieve last score and user current challenge
-    return new MeDto(account, process.env.SSH_PUBLIC_KEY);
+
+    // retrieve current score and user challenge to do
+    const challengeDto: ChallengeDto =
+      await this.challengeService.getUserCurrentChallenge(me.sub);
+    return new MeDto(account, process.env.SSH_PUBLIC_KEY, challengeDto);
   }
 }
