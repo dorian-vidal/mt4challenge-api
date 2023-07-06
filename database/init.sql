@@ -19,15 +19,14 @@ DROP TABLE IF EXISTS challenge CASCADE;
 CREATE TABLE challenge(
     id UUID NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
-    rank INTEGER NOT NULL UNIQUE,
     description TEXT NOT NULL,
     score INTEGER NOT NULL,
-    ssh_command TEXT NOT NULL,
-    ssh_command_verify TEXT NOT NULL
+    ssh_command_verify TEXT NOT NULL,
+    ssh_command_expected_result TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS account_challenge CASCADE;
-CREATE TABLE account_challenge(
+DROP TABLE IF EXISTS achieved_challenge CASCADE;
+CREATE TABLE achieved_challenge(
     id UUID NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
     account_id UUID NOT NULL,
@@ -48,9 +47,8 @@ COMMIT;
 INSERT INTO account(first_name, last_name, email)
 VALUES ('Patrick', 'Cusable', 'patrick-c-mt4challenge@yopmail.com');
 
-INSERT INTO challenge(rank, description, score, ssh_command, ssh_command_verify)
+INSERT INTO challenge(description, score, ssh_command_verify, ssh_command_expected_result)
 VALUES (
-    1,
     'Créer un ficher helloworld.txt qui contient "Hello, World!"',
     5,
     'cat ./helloworld.txt',

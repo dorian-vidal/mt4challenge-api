@@ -8,6 +8,8 @@ import { Logger } from 'winston';
 import { MeDto } from '../dto/auth/me.dto';
 import { JwtInterface } from '../interface/jwt.interface';
 import { AccountEntity } from '../entity/account.entity';
+import { SignUpDto } from '../dto/auth/sign-up.dto';
+import { TokenDto } from '../dto/auth/token.dto';
 
 @Injectable()
 export class AuthService {
@@ -44,11 +46,38 @@ export class AuthService {
     this.logger.info('Successfully send login mail, email=%s', body.email);
   }
 
+  public async register(body: SignUpDto): Promise<TokenDto> {
+    // check if account already exists
+    const account: AccountEntity = await this.accountRepo.findOneBy({
+      email: body.email.toLowerCase(),
+    });
+
+    // if user not already exists
+    // should save into database
+    if (!account) {
+      const newAccountId = await this.accountRepo.insertNewAndGetID(
+        body.email.toLowerCase(),
+        body.first_name,
+        body.last_name,
+      );
+      const tokenDto = new TokenDto();
+      tokenDto.token = this.appJwtService.generateToken({ sub: newAccountId });
+      return tokenDto;
+    } else {
+      this.logger.warn(
+        'User already exists, cannot register again, email=%s',
+        body.email,
+      );
+      return null;
+    }
+  }
+
   public async me(headers: Headers): Promise<MeDto> {
     const me: JwtInterface = this.appJwtService.getJwtFromHeaders(headers);
     const account: AccountEntity = await this.accountRepo.findOneBy({
       id: me.sub,
     });
+    // FIXME: retrieve last score and user current challenge
     return new MeDto(account);
   }
 }

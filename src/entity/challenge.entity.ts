@@ -5,8 +5,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity('account')
-export class AccountEntity {
+@Entity('challenge')
+export class ChallengeEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -17,17 +17,17 @@ export class AccountEntity {
   created_at: Date;
 
   @Column()
-  first_name: string;
+  description: string;
 
   @Column()
-  last_name: string;
+  score: string;
 
-  @Column({ unique: true })
-  email: string;
+  @Column()
+  ssh_command: string;
 
-  @Column({ nullable: true })
-  instance_ip: string;
+  @Column()
+  ssh_command_verify: string;
 
-  @Column({ nullable: true })
-  instance_user: string;
+  @Column()
+  ssh_command_verify_expected_result: string;
 }

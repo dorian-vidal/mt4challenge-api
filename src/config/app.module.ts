@@ -5,6 +5,7 @@ import { InitModule } from './init.module';
 import { DbModule } from './db.module';
 import { defaultWinstonConfig } from './winston.module';
 import { AuthModule } from './auth.module';
+import { ChallengeModule } from './challenge.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { AuthModule } from './auth.module';
     DbModule.getTypeOrm(),
     defaultWinstonConfig('app'),
     AuthModule,
+    ChallengeModule,
   ],
   controllers: [HealthController],
   providers: [HealthService],

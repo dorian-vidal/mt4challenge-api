@@ -18,6 +18,6 @@ export class MeDto {
     this.email = account.email;
     this.first_name = account.first_name;
     this.last_name = account.last_name;
-    this.score = account.score;
+    this.score = 0;
   }
 }

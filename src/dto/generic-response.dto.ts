@@ -1,6 +1,8 @@
-import GeneralEnum from "../enum/general.enum";
+import GeneralEnum from '../enum/general.enum';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class GenericResponseDto {
+  @ApiProperty({ example: GeneralEnum.OK })
   public data: string;
 
   constructor(data: string) {
