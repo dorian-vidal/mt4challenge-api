@@ -11,7 +11,9 @@ import { AuthGuard } from './guard/auth.guard';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { JWTUtil } from './util/jwt.util';
 import { AppJwtService } from './service/app-jwt.service';
+import { BackOfficeJwtService } from './service/back-office-jwt.service';
 import { AppModule } from './config/app.module';
+import { BackOfficeModule } from './config/back-office.module';
 import * as fs from 'fs';
 
 const createApp = async (
@@ -57,6 +59,7 @@ const createApp = async (
 async function bootstrap() {
   const server = express();
   const app = await createApp(server, AppModule, new AppJwtService());
+  const backOffice = await createApp(server, BackOfficeModule, new BackOfficeJwtService());
 
   // swagger
   const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
@@ -67,9 +70,11 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
+  const backOfficeDocument = SwaggerModule.createDocument(backOffice, options);
   SwaggerModule.setup('swagger/app', app, document);
+  SwaggerModule.setup('swagger/back-office', backOffice, backOfficeDocument);
 
-  await Promise.all([app.init()]);
+  await Promise.all([app.init(), backOffice.init()]);
   http.createServer(server).listen(process.env.PORT || 5000);
 }
 
