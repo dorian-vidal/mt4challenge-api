@@ -26,7 +26,7 @@ export class ChallengeEntity {
   ssh_command_verify: string;
 
   @Column()
-  ssh_command_verify_expected_result: string;
+  ssh_command_expected_result: string;
 
   @Column()
   ssh_command_expected_result_dynamic: boolean;

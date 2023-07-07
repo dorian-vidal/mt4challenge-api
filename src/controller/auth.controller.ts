@@ -44,7 +44,7 @@ export class AuthController {
   })
   @ApiResponse({
     status: 201,
-    type: GenericResponseDto,
+    type: TokenDto,
     description: 'If user already exists, response will be null',
   })
   @ApiResponse({ status: 400, description: ErrorEnum.INVALID_EMAIL })

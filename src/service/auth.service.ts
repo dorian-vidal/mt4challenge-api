@@ -82,9 +82,13 @@ export class AuthService {
       id: me.sub,
     });
 
-    // retrieve current score and user challenge to do
-    const challengeDto: ChallengeDto =
-      await this.challengeService.getUserCurrentChallenge(me.sub);
+    let challengeDto: ChallengeDto;
+    if (account.instance_ip != null && account.instance_user != null) {
+      // retrieve current score and user challenge to do
+      challengeDto = await this.challengeService.getUserCurrentChallengeDto(
+        me.sub,
+      );
+    }
     return new MeDto(account, process.env.SSH_PUBLIC_KEY, challengeDto);
   }
 }

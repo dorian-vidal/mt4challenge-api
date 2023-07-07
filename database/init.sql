@@ -52,10 +52,17 @@ INSERT INTO challenge(description, score, ssh_command_verify, ssh_command_expect
 VALUES (
     'Bienvenue au premier défi !<br/>Pour ce premier défi, nous allons commencer par une tâche fondamentale: créer un fichier <code>helloworld.txt</code>, le fichier doit contenir le texte "Hello, World!". Cela peut sembler simple, mais c''est en fait un élément clé de la programmation, car c''est souvent le premier programme qu''un développeur écrit en apprenant un nouveau langage de programmation.',
     5,
-    'cat ./helloworld.txt',
+    'cd ~ && cat ./helloworld.txt',
     'Hello, World!',
     false
 ), (
+    'Vous devez créer un fichier <code>byebyeworld.txt</code>, le fichier doit contenir le texte "Bye Bye, World!".',
+    11,
+    'cd ~ && cat ./byebyeworld.txt',
+    'Bye Bye, World!',
+    false
+),
+(
     'Créer le script <code>today_french.sh</code> qui retourne la date en français dans le format suivant <code>18 avril 2024</code>',
     20,
     './today_french.sh',

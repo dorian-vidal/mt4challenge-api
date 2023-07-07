@@ -4,6 +4,22 @@ import { Repository } from 'typeorm';
 
 @CustomRepository(AccountEntity)
 export class AccountRepository extends Repository<AccountEntity> {
+  public async insertNewAndGetID(
+    email: string,
+    firstName: string,
+    lastName: string,
+  ): Promise<string> {
+    const result: AccountEntity[] = await this.query(
+      `
+      INSERT INTO account (email, first_name, last_name)
+      VALUES ($1, $2, $3)
+      RETURNING id
+    `,
+      [email, firstName, lastName],
+    );
+    return result[0].id;
+  }
+
   public async updateInstance(
     userId: string,
     instanceIp: string,
@@ -20,19 +36,15 @@ export class AccountRepository extends Repository<AccountEntity> {
     );
   }
 
-  public async insertNewAndGetID(
-    email: string,
-    firstName: string,
-    lastName: string,
-  ): Promise<string> {
-    const result = await this.query(
+  public async getInstanceInfosById(userId: string): Promise<AccountEntity> {
+    const result: AccountEntity[] = await this.query(
       `
-      INSERT INTO account (email, first_name, last_name)
-      VALUES ($1, $2, $3)
-      RETURNING id
+      SELECT instance_ip, instance_user
+      FROM account
+      WHERE id = $1
     `,
-      [email, firstName, lastName],
+      [userId],
     );
-    return result[0].id;
+    return result[0];
   }
 }
