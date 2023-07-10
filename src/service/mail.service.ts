@@ -29,4 +29,25 @@ export class MailService {
       throw new BadRequestException();
     }
   }
+
+  public async welcomeAdmin(email: string, appUrl: string): Promise<void> {
+    const data = {
+      from: this.sender,
+      to: email,
+      subject:
+        "Votre lien de connexion sur l'espace back-office MT4 Challenge!",
+      template: 'welcom_admin',
+      'h:X-Mailgun-Variables': JSON.stringify({
+        appUrl: appUrl,
+      }),
+    };
+    try {
+      await this.mg.messages().send(data);
+    } catch (error: any) {
+      this.logger.error(
+        `Error happens while sending back office email, error=${error}`,
+      );
+      throw new BadRequestException();
+    }
+  }
 }

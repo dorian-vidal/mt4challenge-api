@@ -4,6 +4,6 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class BackOfficeJwtService extends JWTUtil {
   constructor() {
-    super(process.env.BO, '5h');
+    super(process.env.BO_JWT_PREFIX, '5h');
   }
 }

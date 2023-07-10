@@ -11,3 +11,9 @@ export class SignInDto {
   @ApiProperty({ example: 'hetic-mt6' })
   promo_slug: string;
 }
+
+export class AdminSignInDto {
+  @IsEmail({}, { message: ErrorEnum.INVALID_EMAIL })
+  @ApiProperty({ example: 'admin@gmail.com' })
+  email: string;
+}

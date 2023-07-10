@@ -13,7 +13,7 @@ import { JWTUtil } from './util/jwt.util';
 import { AppJwtService } from './service/jwt/app-jwt.service';
 import { BackOfficeJwtService } from './service/jwt/back-office-jwt.service';
 import { AppModule } from './config/app.module';
-import { BackOfficeModule } from './config/back-office.module';
+import { BackOfficeModule } from './config/back-office/back-office.module';
 import * as fs from 'fs';
 import { ChallengeDisabledGuard } from './guard/challenge-disabled.guard';
 import { CacheService } from './service/cache.service';

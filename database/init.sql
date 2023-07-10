@@ -47,6 +47,15 @@ CREATE TABLE account(
     CONSTRAINT fk_promo_id FOREIGN KEY(promo_id) REFERENCES promo(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS admin CASCADE;
+CREATE TABLE admin (
+    id UUID NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);
+
 DROP TABLE IF EXISTS challenge CASCADE;
 CREATE TABLE challenge(
     id UUID NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -83,6 +92,9 @@ VALUES ('8d885142-01e5-4d67-b62c-2b8fd9de271b', 'HETIC - MT4', 'hetic-mt4');
 INSERT INTO account(promo_id, first_name, last_name, email)
 VALUES ('8d885142-01e5-4d67-b62c-2b8fd9de271b', 'Patrick', 'Cusable', 'patrick-c-mt4challenge@yopmail.com');
 
+INSERT INTO admin (id, first_name, last_name, email)
+VALUES (uuid_generate_v4(), 'admin', 'admin', 'test-admin-mt4challenge-tus7@yopmail.com');
+
 INSERT INTO challenge(description, score, ssh_command_verify, ssh_command_expected_result, ssh_command_expected_result_dynamic)
 VALUES (
     'Bienvenue au premier défi !<br/>Pour ce premier défi, nous allons commencer par une tâche fondamentale: créer un fichier <code>helloworld.txt</code>, le fichier doit contenir le texte "Hello, World!". Cela peut sembler simple, mais c''est en fait un élément clé de la programmation, car c''est souvent le premier programme qu''un développeur écrit en apprenant un nouveau langage de programmation.',
@@ -96,17 +108,15 @@ VALUES (
     'cd ~ && cat ./byebyeworld.txt',
     'Bye Bye, World!',
     false
-),
-(
-    'Pour ce challenge, il est nécessaire de télécharger <a href="https://wetransfer.com/bhikrbd">ce fichier</a> et placer le contenu dans un dossier <code>~/bastion/</code>.<br/>Nous avons besoin de compter le nombres de fichier contenant l''extension <code>js</code>, <code>json</code> ou <code>py</code>. Attention! Nous voulons ignorer les fichiers dont la taille est inférieure à 500 kilobytes (kB). Veuillez créer un script <code>count_files.sh</code>',
+), (
+    'Pour ce challenge, il est nécessaire de télécharger <a href="https://we.tl/t-jYOz9v07GF">ces fichiers</a>.<br/>Nous avons besoin de compter le nombres de fichier contenant l''extension <code>js</code>, <code>json</code> ou <code>py</code>. Attention! Nous voulons ignorer les fichiers dont la taille est inférieure à 500 kilobytes (kB). Veuillez créer un script <code>count_files.sh</code>',
     15,
-    'cd ~/bastion/ && ./count_files.sh',
-    '35',
+    'cd ~ && ./count_files.sh',
+    '10',
     false
-),
-(
+), (
     'Créer le script <code>today_french.sh</code> qui retourne la date en français dans le format suivant <code>18 avril 2024</code>',
-    20,
+    37,
     'cd ~ && ./today_french.sh',
     'date +''%d %B %Y'' | sed ''s/January/janvier/;s/February/février/;s/March/mars/;s/April/avril/;s/May/mai/;s/June/juin/;s/July/juillet/;s/August/août/;s/September/septembre/;s/October/octobre/;s/November/novembre/;s/December/décembre/''',
     true
