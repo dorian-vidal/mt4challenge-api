@@ -38,7 +38,7 @@ export class JWTUtil {
     let authorization = headers[GeneralEnum.AUTHORIZATION_HEADER];
 
     // if token does not exist in headers or does not start with "Bearer "
-    if (authorization?.startsWith(GeneralEnum.BEARER_PREFIX)) {
+    if (!authorization?.startsWith(GeneralEnum.BEARER_PREFIX)) {
       throw new UnauthorizedException();
     }
 
