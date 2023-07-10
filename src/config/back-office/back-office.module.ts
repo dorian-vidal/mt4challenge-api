@@ -10,11 +10,11 @@ import { CacheService } from '../../service/cache.service';
 
 @Module({
   imports: [
-    InitModule, 
-    DbModule.getTypeOrm(), 
+    InitModule,
+    DbModule.getTypeOrm(),
     CacheRegisterModule.getConfiguration(),
     defaultWinstonConfig(),
-    BackOfficeAuthModule
+    BackOfficeAuthModule,
   ],
   controllers: [HealthController],
   providers: [CacheService, HealthService],

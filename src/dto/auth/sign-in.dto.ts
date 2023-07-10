@@ -12,7 +12,6 @@ export class SignInDto {
   promo_slug: string;
 }
 
-
 export class AdminSignInDto {
   @IsEmail({}, { message: ErrorEnum.INVALID_EMAIL })
   @ApiProperty({ example: 'admin@gmail.com' })

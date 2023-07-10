@@ -7,17 +7,8 @@ import { BackOfficeJwtService } from '../../service/jwt/back-office-jwt.service'
 import { MailService } from '../../service/mail.service';
 
 @Module({
-    imports: [
-      TypeOrmExModule.forCustomRepository([
-        AdminRepository,
-      ]),
-    ],
-    controllers: [BackOfficeAuthController],
-    providers: [
-      BackOfficeAuthService,
-      BackOfficeJwtService,
-      MailService,
-    ],
-  })
- 
+  imports: [TypeOrmExModule.forCustomRepository([AdminRepository])],
+  controllers: [BackOfficeAuthController],
+  providers: [BackOfficeAuthService, BackOfficeJwtService, MailService],
+})
 export class BackOfficeAuthModule {}
