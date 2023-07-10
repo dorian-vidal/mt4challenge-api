@@ -47,6 +47,15 @@ CREATE TABLE account(
     CONSTRAINT fk_promo_id FOREIGN KEY(promo_id) REFERENCES promo(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS admin CASCADE;
+CREATE TABLE admin (
+    id UUID NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);
+
 DROP TABLE IF EXISTS challenge CASCADE;
 CREATE TABLE challenge(
     id UUID NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -82,6 +91,9 @@ VALUES ('8d885142-01e5-4d67-b62c-2b8fd9de271b', 'HETIC - MT4', 'hetic-mt4');
 
 INSERT INTO account(promo_id, first_name, last_name, email)
 VALUES ('8d885142-01e5-4d67-b62c-2b8fd9de271b', 'Patrick', 'Cusable', 'patrick-c-mt4challenge@yopmail.com');
+
+INSERT INTO admin (id, first_name, last_name, email)
+VALUES (uuid_generate_v4(), 'admin', 'admin', 'test-admin-mt4challenge-tus7@yopmail.com');
 
 INSERT INTO challenge(description, score, ssh_command_verify, ssh_command_expected_result, ssh_command_expected_result_dynamic)
 VALUES (
