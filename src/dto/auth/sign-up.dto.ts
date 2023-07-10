@@ -14,4 +14,8 @@ export class SignUpDto {
   @IsNotEmpty({ message: ErrorEnum.INVALID_LAST_NAME })
   @ApiProperty({ example: 'Doe' })
   last_name: string;
+
+  @IsNotEmpty({ message: ErrorEnum.INVALID_PROMO_SLUG })
+  @ApiProperty({ example: 'hetic-mt6' })
+  promo_slug: string;
 }

@@ -1,0 +1,8 @@
+.git
+/dist
+.idea
+.logs
+*.log
+node_modules
+ssh
+.env*

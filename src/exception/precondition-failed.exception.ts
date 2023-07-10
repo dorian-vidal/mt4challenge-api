@@ -3,6 +3,9 @@ import GeneralEnum from '../enum/general.enum';
 
 export class PreconditionFailedException extends HttpException {
   constructor(message?: string) {
-    super(message || GeneralEnum.PRECONDITION_FAILED, HttpStatus.PRECONDITION_FAILED);
+    super(
+      message || GeneralEnum.PRECONDITION_FAILED,
+      HttpStatus.PRECONDITION_FAILED,
+    );
   }
 }

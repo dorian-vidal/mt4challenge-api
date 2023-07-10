@@ -6,16 +6,19 @@ import { DbModule } from './db.module';
 import { defaultWinstonConfig } from './winston.module';
 import { AuthModule } from './auth.module';
 import { ChallengeModule } from './challenge.module';
+import { CacheRegisterModule } from './cache-register.module';
+import { CacheService } from '../service/cache.service';
 
 @Module({
   imports: [
     InitModule,
     DbModule.getTypeOrm(),
-    defaultWinstonConfig('app'),
+    CacheRegisterModule.getConfiguration(),
+    defaultWinstonConfig(),
     AuthModule,
     ChallengeModule,
   ],
   controllers: [HealthController],
-  providers: [HealthService],
+  providers: [HealthService, CacheService],
 })
 export class AppModule {}

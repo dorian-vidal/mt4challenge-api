@@ -1,5 +1,5 @@
 export interface JwtInterface {
-  // account ID (UUID)
+  // account ID
   sub: string;
 
   // date when token was delivered

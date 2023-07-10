@@ -1,35 +1,17 @@
 import * as winston from 'winston';
 import { WinstonModule } from 'nest-winston';
+import { DynamicModule } from '@nestjs/common';
+import { Logtail } from '@logtail/node';
+import { LogtailTransport } from '@logtail/winston';
 
 /**
  * Get default Winston logging config.
- * @param appName App name used to create logging files.
  */
-export const defaultWinstonConfig = (appName: string) => {
-  const logFormat = winston.format.combine(
-    winston.format.splat(),
-    winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-    winston.format.json(),
-  );
-
+export const defaultWinstonConfig = (): DynamicModule => {
   return WinstonModule.forRoot({
     transports: [
-      new winston.transports.Console({
-        format: logFormat,
-        level: 'debug',
-      }),
-      new winston.transports.File({
-        format: logFormat,
-        dirname: '.logs',
-        filename: `${appName}_error.log`,
-        level: 'error',
-      }),
-      new winston.transports.File({
-        format: logFormat,
-        dirname: '.logs',
-        filename: `${appName}_combined.log`,
-        level: 'debug',
-      }),
+      new winston.transports.Console({ level: 'debug' }),
+      new LogtailTransport(new Logtail(process.env.LOGTAIL_SOURCE_TOKEN)),
     ],
   });
 };

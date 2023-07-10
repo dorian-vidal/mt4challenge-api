@@ -4,6 +4,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { PromoEntity } from './promo.entity';
 
 @Entity('challenge')
 export class ChallengeEntity {
@@ -15,6 +16,8 @@ export class ChallengeEntity {
     default: () => 'CURRENT_TIMESTAMP',
   })
   created_at: Date;
+
+  promo: PromoEntity;
 
   @Column()
   description: string;

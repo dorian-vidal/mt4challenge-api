@@ -8,8 +8,12 @@ export class HealthDto {
   @ApiProperty()
   version: string;
 
-  constructor(version: string) {
+  @ApiProperty()
+  challenge_disabled: boolean;
+
+  constructor(version: string, isChallengeDisabled: boolean) {
     this.state = GeneralEnum.OK;
     this.version = version;
+    this.challenge_disabled = isChallengeDisabled;
   }
 }

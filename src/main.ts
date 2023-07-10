@@ -10,11 +10,13 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AuthGuard } from './guard/auth.guard';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { JWTUtil } from './util/jwt.util';
-import { AppJwtService } from './service/app-jwt.service';
-import { BackOfficeJwtService } from './service/back-office-jwt.service';
+import { AppJwtService } from './service/jwt/app-jwt.service';
+import { BackOfficeJwtService } from './service/jwt/back-office-jwt.service';
 import { AppModule } from './config/app.module';
 import { BackOfficeModule } from './config/back-office.module';
 import * as fs from 'fs';
+import { ChallengeDisabledGuard } from './guard/challenge-disabled.guard';
+import { CacheService } from './service/cache.service';
 
 const createApp = async (
   server: any,
@@ -59,7 +61,18 @@ const createApp = async (
 async function bootstrap() {
   const server = express();
   const app = await createApp(server, AppModule, new AppJwtService());
-  const backOffice = await createApp(server, BackOfficeModule, new BackOfficeJwtService());
+  app.useGlobalGuards(
+    new ChallengeDisabledGuard(
+      app.get<Reflector>(Reflector),
+      app.get<CacheService>(CacheService),
+    ),
+  );
+
+  const backOffice = await createApp(
+    server,
+    BackOfficeModule,
+    new BackOfficeJwtService(),
+  );
 
   // swagger
   const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));

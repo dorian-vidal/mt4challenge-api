@@ -2,8 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { PromoEntity } from './promo.entity';
 
 @Entity('account')
 export class AccountEntity {
@@ -30,4 +33,8 @@ export class AccountEntity {
 
   @Column({ nullable: true })
   instance_user: string;
+
+  @ManyToOne(() => PromoEntity, (promo: PromoEntity) => promo.accounts)
+  @JoinColumn({ name: 'promo_id' })
+  promo: PromoEntity;
 }

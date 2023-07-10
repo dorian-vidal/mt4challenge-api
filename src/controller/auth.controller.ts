@@ -34,7 +34,7 @@ export class AuthController {
   @ApiBody({ type: SignInDto })
   @DisabledAuth()
   public async login(@Body() body: SignInDto): Promise<GenericResponseDto> {
-    this.logger.info('HTTP Handling login, email=%s', body.email);
+    this.logger.info(`HTTP Handling login, email=${body.email}`);
     return this.authService.login(body).then(() => GenericResponseDto.ok());
   }
 
@@ -53,7 +53,7 @@ export class AuthController {
   @ApiBody({ type: SignUpDto })
   @DisabledAuth()
   public async register(@Body() body: SignUpDto): Promise<TokenDto> {
-    this.logger.info('HTTP Handling register, email=%s', body.email);
+    this.logger.info(`HTTP Handling register, email=${body.email}`);
     return this.authService.register(body);
   }
 

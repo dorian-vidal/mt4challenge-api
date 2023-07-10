@@ -5,11 +5,7 @@ import { defaultWinstonConfig } from './winston.module';
 import { BackOfficeController } from 'src/controller/back-office.controller';
 
 @Module({
-  imports: [
-    InitModule,
-    DbModule.getTypeOrm(),
-    defaultWinstonConfig('back-office')
-  ],
+  imports: [InitModule, DbModule.getTypeOrm(), defaultWinstonConfig()],
   controllers: [BackOfficeController],
   providers: [],
 })

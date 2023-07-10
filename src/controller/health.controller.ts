@@ -3,6 +3,7 @@ import { HealthService } from '../service/health.service';
 import { HealthDto } from '../dto/app/health.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { DisabledAuth } from '../decorator/disabled-auth.decorator';
+import { DisabledChallengeStatusCheck } from '../decorator/disabled-challenge-status-check.decorator';
 
 @Controller()
 export class HealthController {
@@ -12,6 +13,7 @@ export class HealthController {
   @ApiOperation({ summary: 'Check that API is running and get version' })
   @ApiResponse({ status: 200, type: HealthDto })
   @DisabledAuth()
+  @DisabledChallengeStatusCheck()
   public health(): Promise<HealthDto> {
     return this.healthService.health();
   }

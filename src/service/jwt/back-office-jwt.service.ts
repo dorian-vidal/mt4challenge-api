@@ -1,4 +1,4 @@
-import { JWTUtil } from '../util/jwt.util';
+import { JWTUtil } from '../../util/jwt.util';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

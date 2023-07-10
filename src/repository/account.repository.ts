@@ -8,14 +8,15 @@ export class AccountRepository extends Repository<AccountEntity> {
     email: string,
     firstName: string,
     lastName: string,
+    promoId: string,
   ): Promise<string> {
     const result: AccountEntity[] = await this.query(
       `
-      INSERT INTO account (email, first_name, last_name)
-      VALUES ($1, $2, $3)
+      INSERT INTO account (email, first_name, last_name, promo_id)
+      VALUES ($1, $2, $3, $4)
       RETURNING id
     `,
-      [email, firstName, lastName],
+      [email, firstName, lastName, promoId],
     );
     return result[0].id;
   }
@@ -39,7 +40,7 @@ export class AccountRepository extends Repository<AccountEntity> {
   public async getInstanceInfosById(userId: string): Promise<AccountEntity> {
     const result: AccountEntity[] = await this.query(
       `
-      SELECT instance_ip, instance_user
+      SELECT id, instance_ip, instance_user
       FROM account
       WHERE id = $1
     `,

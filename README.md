@@ -5,13 +5,18 @@
 - [Express](https://expressjs.com/fr/)
 - [TypeORM](https://typeorm.io/)
 - [Swagger](https://swagger.io/)
-- [JSON Web Tokens](https://jwt.io/)
+- [JSON Web Token](https://jwt.io/)
 - [PostgreSQL](https://www.postgresql.org/)
+- [Redis](https://redis.io/)
 - [Docker](https://www.docker.com/)
 
-## 🧑🏻‍💻 Installation (using Docker)
-```bash
-$ npm install
+## 📋 Requirements
+- [Docker](https://www.docker.com/)
+- Environments variables in `.env.docker` file (secret)
+
+## 🧑🏻‍💻 Local installation (using Docker)
+```shell
+$ docker-compose up --build
 ```
 
 ## 📄 License
