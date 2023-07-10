@@ -1,6 +1,7 @@
 import { DynamicModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountEntity } from '../entity/account.entity';
+import { AdminEntity } from '../entity/admin.entity';
 import { AchievedChallengeEntity } from '../entity/achieved-challenge.entity';
 import { ChallengeEntity } from '../entity/challenge.entity';
 import { PromoEntity } from '../entity/promo.entity';
@@ -22,6 +23,7 @@ export class DbModule {
       keepConnectionAlive: true,
       entities: [
         AccountEntity,
+        AdminEntity,
         AchievedChallengeEntity,
         ChallengeEntity,
         PromoEntity,
