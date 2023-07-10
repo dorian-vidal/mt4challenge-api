@@ -89,7 +89,7 @@ export class AuthService {
           body.email.toLowerCase(),
           body.first_name,
           body.last_name,
-          body.promo_slug,
+          promo.id,
         );
       const tokenDto: TokenDto = new TokenDto();
       tokenDto.token = this.appJwtService.generateToken({ sub: newAccountId });
