@@ -3,6 +3,8 @@ import { InitModule } from '../init.module';
 import { DbModule } from '../db.module';
 import { defaultWinstonConfig } from '../winston.module';
 import { BackOfficeAuthModule } from './back-office-auth.module';
+import { BackOfficeStudentModule } from './back-office-student.module';
+import { BackOfficePromoModule } from './back-office-promo.module';
 import { HealthController } from 'src/controller/health.controller';
 import { HealthService } from 'src/service/health.service';
 import { CacheRegisterModule } from '../cache-register.module';
@@ -16,6 +18,8 @@ import { BackOfficeChallengeModule } from './back-office-challenge.module';
     CacheRegisterModule.getConfiguration(),
     defaultWinstonConfig(),
     BackOfficeAuthModule,
+    BackOfficeStudentModule,
+    BackOfficePromoModule,
     BackOfficeChallengeModule,
   ],
   controllers: [HealthController],
