@@ -6,7 +6,4 @@ export class PromoDto {
   
     @ApiProperty()
     slug: string;
-      
-    @ApiProperty()
-    students_count: number;
 }
