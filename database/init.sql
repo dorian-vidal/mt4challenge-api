@@ -116,7 +116,7 @@ VALUES (
     false
 ), (
     'Créer le script <code>today_french.sh</code> qui retourne la date en français dans le format suivant <code>18 avril 2024</code>',
-    37,
+    20,
     'cd ~ && ./today_french.sh',
     'date +''%d %B %Y'' | sed ''s/January/janvier/;s/February/février/;s/March/mars/;s/April/avril/;s/May/mai/;s/June/juin/;s/July/juillet/;s/August/août/;s/September/septembre/;s/October/octobre/;s/November/novembre/;s/December/décembre/''',
     true

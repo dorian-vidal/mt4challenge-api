@@ -7,6 +7,7 @@ import { HealthController } from 'src/controller/health.controller';
 import { HealthService } from 'src/service/health.service';
 import { CacheRegisterModule } from '../cache-register.module';
 import { CacheService } from '../../service/cache.service';
+import { BackOfficeChallengeModule } from './back-office-challenge.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { CacheService } from '../../service/cache.service';
     CacheRegisterModule.getConfiguration(),
     defaultWinstonConfig(),
     BackOfficeAuthModule,
+    BackOfficeChallengeModule,
   ],
   controllers: [HealthController],
   providers: [CacheService, HealthService],
