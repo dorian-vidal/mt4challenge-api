@@ -6,7 +6,6 @@ import { PromoDto } from 'src/dto/bo/promo.dto';
 
 @CustomRepository(PromoEntity)
 export class PromoRepository extends Repository<PromoEntity> {
-
   public async findAll(): Promise<PromoWithStudentsDto[]> {
     return await this.query(
       `

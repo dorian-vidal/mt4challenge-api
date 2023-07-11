@@ -14,17 +14,16 @@ export class BackOfficePromoService {
   /**
    * find all promos.
    */
-    public async findAll(): Promise<PromoWithStudentsDto[]> {
-        const result: PromoWithStudentsDto[] = await this.promoRepository.findAll();
-        return result;
-    }
+  public async findAll(): Promise<PromoWithStudentsDto[]> {
+    const result: PromoWithStudentsDto[] = await this.promoRepository.findAll();
+    return result;
+  }
 
-    /**
-     * create a new promo.
-     * @param body  Request body, it should contain name and slug.
-     */
-    public async create(body: PromoDto): Promise<void> {
-        await this.promoRepository.createPromo(body.name, body.slug);
-    }
-
+  /**
+   * create a new promo.
+   * @param body  Request body, it should contain name and slug.
+   */
+  public async create(body: PromoDto): Promise<void> {
+    await this.promoRepository.createPromo(body.name, body.slug);
+  }
 }

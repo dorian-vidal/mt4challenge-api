@@ -5,7 +5,6 @@ import { AccountWithScoreDto } from 'src/dto/bo/account-with-score.dto';
 
 @CustomRepository(AccountEntity)
 export class AccountRepository extends Repository<AccountEntity> {
-
   public async findAll(): Promise<AccountWithScoreDto[]> {
     return await this.query(
       `
@@ -18,10 +17,9 @@ export class AccountRepository extends Repository<AccountEntity> {
         challenge c ON ac.challenge_id = c.id
       GROUP BY
         a.id 
-      `
+      `,
     );
   }
-
 
   public async insertNewAndGetID(
     email: string,

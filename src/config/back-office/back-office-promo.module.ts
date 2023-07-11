@@ -4,7 +4,6 @@ import { TypeOrmExModule } from '../typeorm-ex.module';
 import { PromoRepository } from '../../repository/promo.repository';
 import { Module } from '@nestjs/common';
 
-
 @Module({
   imports: [TypeOrmExModule.forCustomRepository([PromoRepository])],
   controllers: [BackOfficePromoController],

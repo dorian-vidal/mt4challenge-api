@@ -13,9 +13,9 @@ export class BackOfficeStudentService {
   /**
    * find all students.
    */
-    public async findAll(): Promise<AccountWithScoreDto[]> {
-    const result: AccountWithScoreDto[] = await this.accountRepository.findAll();
+  public async findAll(): Promise<AccountWithScoreDto[]> {
+    const result: AccountWithScoreDto[] =
+      await this.accountRepository.findAll();
     return result;
-    }
-
+  }
 }

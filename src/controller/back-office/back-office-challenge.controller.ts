@@ -1,5 +1,11 @@
 import { Body, Controller, Get, Inject, Put } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Logger } from 'winston';
 import { BackOfficeChallengeService } from '../../service/back-office-challenge.service';
 import { IsChallengeDisabledDto } from '../../dto/bo/is-challenge-disabled.dto';
@@ -20,6 +26,7 @@ export class BackOfficeChallengeController {
   })
   @ApiResponse({ status: 201, type: IsChallengeDisabledDto })
   @ApiResponse({ status: 401, description: GeneralEnum.NOT_AUTHORIZED })
+  @ApiBearerAuth()
   public async boIsDisabled(): Promise<IsChallengeDisabledDto> {
     this.logger.info(`HTTP Handling boIsDisabled`);
     return this.backOfficeChallengeService.isChallengeDisabled();
@@ -32,6 +39,7 @@ export class BackOfficeChallengeController {
   @ApiResponse({ status: 201, type: GenericResponseDto })
   @ApiResponse({ status: 401, description: GeneralEnum.NOT_AUTHORIZED })
   @ApiBody({ type: IsChallengeDisabledDto })
+  @ApiBearerAuth()
   public async setIsDisabled(
     @Body() body: IsChallengeDisabledDto,
   ): Promise<GenericResponseDto> {

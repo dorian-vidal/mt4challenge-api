@@ -4,7 +4,6 @@ import { TypeOrmExModule } from '../typeorm-ex.module';
 import { AccountRepository } from '../../repository/account.repository';
 import { Module } from '@nestjs/common';
 
-
 @Module({
   imports: [TypeOrmExModule.forCustomRepository([AccountRepository])],
   controllers: [BackOfficeStudentController],
