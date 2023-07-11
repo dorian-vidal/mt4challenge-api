@@ -1,9 +1,28 @@
 import { AccountEntity } from '../entity/account.entity';
 import { CustomRepository } from '../decorator/typeorm-ex.decorator';
 import { Repository } from 'typeorm';
+import { AccountWithScoreDto } from 'src/dto/bo/account-with-score.dto';
 
 @CustomRepository(AccountEntity)
 export class AccountRepository extends Repository<AccountEntity> {
+
+  public async findAll(): Promise<AccountWithScoreDto[]> {
+    return await this.query(
+      `
+      SELECT a.first_name, a.last_name, a.email, COALESCE(MAX(c.score),0) AS score
+      FROM
+        account a
+      LEFT JOIN
+        achieved_challenge ac ON a.id = ac.account_id
+      LEFT JOIN
+        challenge c ON ac.challenge_id = c.id
+      GROUP BY
+        a.id 
+      `
+    );
+  }
+
+
   public async insertNewAndGetID(
     email: string,
     firstName: string,
