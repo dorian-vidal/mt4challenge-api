@@ -12,10 +12,9 @@ export class BackOfficeStudentService {
 
   /**
    * find all students.
+   * @param promoSlug Slug of related promo.
    */
-  public async findAll(): Promise<AccountWithScoreDto[]> {
-    const result: AccountWithScoreDto[] =
-      await this.accountRepository.findAll();
-    return result;
+  public async findAll(promoSlug: string): Promise<AccountWithScoreDto[]> {
+    return this.accountRepository.findAll(promoSlug);
   }
 }
