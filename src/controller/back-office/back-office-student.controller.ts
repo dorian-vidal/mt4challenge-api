@@ -5,7 +5,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { BackOfficeStudentService } from 'src/service/back-office-student.service';
+import { BackOfficeStudentService } from 'src/service/bo/back-office-student.service';
 import { Controller, Get, Inject, Query } from '@nestjs/common';
 import GeneralEnum from 'src/enum/general.enum';
 import { Logger } from 'winston';

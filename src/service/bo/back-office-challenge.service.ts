@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Logger } from 'winston';
-import { CacheService } from './cache.service';
-import { IsChallengeDisabledDto } from '../dto/bo/is-challenge-disabled.dto';
+import { CacheService } from '../cache.service';
+import { IsChallengeDisabledDto } from '../../dto/bo/is-challenge-disabled.dto';
 
 @Injectable()
 export class BackOfficeChallengeService {

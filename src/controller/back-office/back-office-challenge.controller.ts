@@ -7,7 +7,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Logger } from 'winston';
-import { BackOfficeChallengeService } from '../../service/back-office-challenge.service';
+import { BackOfficeChallengeService } from '../../service/bo/back-office-challenge.service';
 import { IsChallengeDisabledDto } from '../../dto/bo/is-challenge-disabled.dto';
 import GeneralEnum from '../../enum/general.enum';
 import { GenericResponseDto } from '../../dto/generic-response.dto';

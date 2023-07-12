@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { PromoRepository } from '../repository/promo.repository';
+import { PromoRepository } from '../../repository/promo.repository';
 import { Logger } from 'winston';
 import { PromoWithStudentsDto } from 'src/dto/bo/promo-with-students.dto';
 import { PromoDto } from 'src/dto/bo/promo.dto';
-import { PromoEntity } from '../entity/promo.entity';
-import { BadRequestException } from '../exception/bad-request.exception';
+import { PromoEntity } from '../../entity/promo.entity';
+import { BadRequestException } from '../../exception/bad-request.exception';
 
 @Injectable()
 export class BackOfficePromoService {

@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { AdminRepository } from '../repository/admin.repository';
-import { AdminSignInDto } from '../dto/auth/sign-in.dto';
-import { BackOfficeJwtService } from './jwt/back-office-jwt.service';
-import { AppEndpointsEnum } from '../enum/app-endpoints.enum';
-import { MailService } from './mail.service';
+import { AdminRepository } from '../../repository/admin.repository';
+import { AdminSignInDto } from '../../dto/auth/sign-in.dto';
+import { BackOfficeJwtService } from '../jwt/back-office-jwt.service';
+import { AppEndpointsEnum } from '../../enum/app-endpoints.enum';
+import { MailService } from '../mail.service';
 import { Logger } from 'winston';
-import { AdminEntity } from '../entity/admin.entity';
-import { ForbiddenException } from '../exception/forbidden.exception';
+import { AdminEntity } from '../../entity/admin.entity';
+import { ForbiddenException } from '../../exception/forbidden.exception';
 
 @Injectable()
 export class BackOfficeAuthService {

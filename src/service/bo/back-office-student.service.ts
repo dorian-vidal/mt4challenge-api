@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { AccountRepository } from '../repository/account.repository';
+import { AccountRepository } from '../../repository/account.repository';
 import { Logger } from 'winston';
 import { AccountWithScoreDto } from 'src/dto/bo/account-with-score.dto';
 

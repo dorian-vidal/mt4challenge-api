@@ -5,8 +5,8 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { BackOfficePromoService } from 'src/service/back-office-promo.service';
-import { Controller, Inject, Get, Post, Body } from '@nestjs/common';
+import { BackOfficePromoService } from 'src/service/bo/back-office-promo.service';
+import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 import { PromoWithStudentsDto } from 'src/dto/bo/promo-with-students.dto';
 import { PromoDto } from 'src/dto/bo/promo.dto';
 import GeneralEnum from 'src/enum/general.enum';

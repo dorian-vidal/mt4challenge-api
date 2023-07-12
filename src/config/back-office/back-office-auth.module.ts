@@ -1,5 +1,5 @@
 import { BackOfficeAuthController } from '../../controller/back-office/back-office-auth.controller';
-import { BackOfficeAuthService } from '../../service/back-office-auth.service';
+import { BackOfficeAuthService } from '../../service/bo/back-office-auth.service';
 import { TypeOrmExModule } from '../typeorm-ex.module';
 import { AdminRepository } from '../../repository/admin.repository';
 import { Module } from '@nestjs/common';

@@ -1,6 +1,6 @@
 import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { BackOfficeAuthService } from '../../service/back-office-auth.service';
+import { BackOfficeAuthService } from '../../service/bo/back-office-auth.service';
 import { GenericResponseDto } from '../../dto/generic-response.dto';
 import { AdminSignInDto } from '../../dto/auth/sign-in.dto';
 import { Logger } from 'winston';

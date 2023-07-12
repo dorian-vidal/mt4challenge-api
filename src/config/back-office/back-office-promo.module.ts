@@ -1,5 +1,5 @@
 import { BackOfficePromoController } from '../../controller/back-office/back-office-promo.controller';
-import { BackOfficePromoService } from '../../service/back-office-promo.service';
+import { BackOfficePromoService } from '../../service/bo/back-office-promo.service';
 import { TypeOrmExModule } from '../typeorm-ex.module';
 import { PromoRepository } from '../../repository/promo.repository';
 import { Module } from '@nestjs/common';

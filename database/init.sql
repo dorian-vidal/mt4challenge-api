@@ -112,7 +112,7 @@ VALUES (
     'Pour ce challenge, il est nécessaire de télécharger <a href="https://we.tl/t-jYOz9v07GF">ces fichiers</a>.<br/>Nous avons besoin de compter le nombres de fichier contenant l''extension <code>js</code>, <code>json</code> ou <code>py</code>. Attention! Nous voulons ignorer les fichiers dont la taille est inférieure à 500 kilobytes (kB). Veuillez créer un script <code>count_files.sh</code>',
     15,
     'cd ~ && ./count_files.sh',
-    '10',
+    '36',
     false
 ), (
     'Créer le script <code>today_french.sh</code> qui retourne la date en français dans le format suivant <code>18 avril 2024</code>',
