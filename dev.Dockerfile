@@ -4,5 +4,4 @@ COPY package*.json ./
 RUN npm ci --include=dev
 RUN npm install webpack
 COPY . .
-RUN npm run build
-CMD ["npm", "run", "start:prod" ]
+CMD ["npm", "run", "start:dev" ]
